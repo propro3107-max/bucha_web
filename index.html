@@ -143,23 +143,46 @@
 
         /* --- HEADER --- */
         .header {
-            width: 100%; padding: 15px 20px 10px 20px;
-            display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 12px;
+            width: 100%;
+            padding: 12px 20px 10px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
             position: sticky; top: 0; z-index: 50;
             background: var(--bg-color); transition: background 0.3s;
+        }
+
+        /* Новий контейнер для логотипу (зліва) та часу оновлення (справа) */
+        .header-top {
+            width: 100%;
+            max-width: 500px; /* Тримаємо гарно по центру на ПК */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
         /* Стилі для нового логотипу та назви */
         .brand-title {
             display: flex; align-items: center; gap: 8px;
-            font-size: 20px; font-weight: 800; color: var(--text-main);
+            font-size: 17px; /* Трохи зменшили для елегантності */
+            font-weight: 800; color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .brand-logo {
-            width: 28px; height: 28px;
+            width: 24px; height: 24px; /* Компактний розмір */
             border-radius: 50%;
-            box-shadow: 0 0 12px rgba(231, 76, 60, 0.6); /* Червоне світіння під лого */
+            box-shadow: 0 0 10px rgba(231, 76, 60, 0.6); /* Червоне світіння під лого */
+        }
+
+        /* Стиль для часу оновлення */
+        .updated {
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 500;
+            text-align: right;
         }
 
         .queue-select-btn {
@@ -173,20 +196,6 @@
         .queue-select-btn:active { opacity: 0.7; }
         .arrow-icon { font-size: 12px; opacity: 0.7; transition: 0.3s; }
         .queue-select-btn.open .arrow-icon { transform: rotate(180deg); }
-
-        .top-bar {
-            width: 100%; display: flex; justify-content: space-between;
-            align-items: center; padding: 10px 16px 0 16px; margin-top: 4px; gap: 10px;
-        }
-        .top-bar .users {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            color: var(--text-muted);
-            white-space: nowrap;
-        }
-        .top-bar .updated { color: var(--text-muted); font-size: 11px; font-weight: 500; }
-        .top-bar .users #topUsers { position: relative; top: 1px; }
 
         #app-content {
             width: 100%;
@@ -380,10 +389,11 @@
         }
 
         /* 🟢 ЗЕЛЕНИЙ (Світло є) */
+        /* 🟡 ЗОЛОТИЙ (Світло є) */
         .card.c-on .card-progress-fill {
-            /* Градієнт: від темного до яскравого */
-            background: linear-gradient(90deg, rgba(46, 204, 113, 0.4) 0%, rgba(46, 204, 113, 1) 100%);
-            box-shadow: 0 -2px 10px rgba(46, 204, 113, 0.5); /* Світіння вгору */
+            /* Градієнт: від темного до яскравого жовтого */
+            background: linear-gradient(90deg, rgba(255, 204, 0, 0.4) 0%, rgba(255, 204, 0, 1) 100%);
+            box-shadow: 0 -2px 10px rgba(255, 204, 0, 0.5); /* Світіння вгору */
         }
 
         /* 🔴 ЧЕРВОНИЙ (Світла нема) */
@@ -1920,17 +1930,19 @@
 </head>
 <body>
 
-    <div class="top-bar" style="justify-content: center;">
-        <span class="updated" id="topUpdated">Графік оновлено: …</span>
-    </div>
+    <!-- Старого блоку top-bar тут більше немає взагалі! -->
 
     <div class="header">
-        <div class="brand-title">
-            <!-- Зміни src на просто "logo.png" -->
-            <img src="logo.png" alt="logo" class="brand-logo">
-            <span>Світло ⚡️ БУЧА</span>
+        <!-- Верхній рядок: Лого зліва, Оновлено справа -->
+        <div class="header-top">
+            <div class="brand-title">
+                <img src="logo.png" alt="logo" class="brand-logo">
+                <span>Світло ⚡️ БУЧА</span>
+            </div>
+            <span class="updated" id="topUpdated">Графік оновлено: …</span>
         </div>
 
+        <!-- Нижній рядок: Кнопка черги по центру -->
         <div class="queue-select-btn" onclick="toggleModal()">
             <span id="queueTitle">Завантаження...</span>
             <span class="arrow-icon">▼</span>
